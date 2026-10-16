@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* Class-based dark mode (toggled on <html> by ThemeProvider) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   Brand is ORANGE — the whole palette is built from orange + warm neutrals,
+   plus semantic emerald (money back) / rose (owes) for balances only.
+--------------------------------------------------------------------------- */
+:root {
+  --mm-canvas: #fdfaf6;
+  --mm-surface: #ffffff;
+  --mm-surface-2: #f8f3ed;
+  --mm-surface-3: #f1e9e0;
+  --mm-border: #ece2d7;
+  --mm-border-strong: #ded0c0;
+  --mm-text: #1c1917;
+  --mm-text-soft: #57534e;
+  --mm-muted: #857f78;
+
+  --mm-danger: #e11d48;
+  --mm-danger-soft: #fff1f2;
+  --mm-success: #047857;
+  --mm-success-soft: #ecfdf5;
+  --mm-shadow: 0 1px 2px rgb(28 25 23 / 0.04), 0 8px 24px -12px rgb(28 25 23 / 0.14);
+
+  color-scheme: light;
+}
+
+.dark {
+  --mm-canvas: #131110;
+  --mm-surface: #1d1a18;
+  --mm-surface-2: #262220;
+  --mm-surface-3: #322c28;
+  --mm-border: #322b26;
+  --mm-border-strong: #453b33;
+  --mm-text: #faf7f4;
+  --mm-text-soft: #d6cec6;
+  --mm-muted: #a29a92;
+
+  --mm-danger: #fb7185;
+  --mm-danger-soft: #2a1719;
+  --mm-success: #34d399;
+  --mm-success-soft: #12241e;
+  --mm-shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -14px rgb(0 0 0 / 0.7);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--mm-canvas);
+  --color-surface: var(--mm-surface);
+  --color-surface-2: var(--mm-surface-2);
+  --color-surface-3: var(--mm-surface-3);
+  --color-line: var(--mm-border);
+  --color-line-strong: var(--mm-border-strong);
+  --color-ink: var(--mm-text);
+  --color-ink-soft: var(--mm-text-soft);
+  --color-muted: var(--mm-muted);
+  --color-danger: var(--mm-danger);
+  --color-danger-soft: var(--mm-danger-soft);
+  --color-success: var(--mm-success);
+  --color-success-soft: var(--mm-success-soft);
+}
+
+@theme {
+  /* Latin glyphs from Inter, Bengali glyphs from Noto Sans Bengali. */
+  --font-sans: "Inter", "Noto Sans Bengali", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* The one and only brand colour: ORANGE. */
+  --color-brand-50: #fff7ed;
+  --color-brand-100: #ffedd5;
+  --color-brand-200: #fed7aa;
+  --color-brand-300: #fdba74;
+  --color-brand-400: #fb923c;
+  --color-brand-500: #f97316;
+  --color-brand-600: #ea580c;
+  --color-brand-700: #c2410c;
+  --color-brand-800: #9a3412;
+  --color-brand-900: #7c2d12;
+  --color-brand-950: #431407;
+
+  --radius-card: 1.125rem;
+  --shadow-card: var(--mm-shadow);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--mm-canvas);
+  color: var(--mm-text);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+/* No blue anywhere: every native control and focus ring is orange. */
+:where(input, select, textarea, button, a) {
+  accent-color: #f97316;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.dark input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.6;
+}
+
+/* Numeric fields line up nicely on a phone keypad */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ---------------------------------------------------------------------------
+   Helpers
+--------------------------------------------------------------------------- */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.safe-bottom {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px));
+}
+
+.card {
+  background-color: var(--mm-surface);
+  border: 1px solid var(--mm-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--mm-shadow);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+@keyframes mm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-rise {
+  animation: mm-rise 0.22s ease-out both;
+}
+
+@keyframes mm-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-sheet {
+  animation: mm-slide-up 0.2s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
