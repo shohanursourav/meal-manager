@@ -299,9 +299,9 @@ function MealRow({
       <div className="mt-3 flex items-center gap-2">
         <button
           type="button"
-          onClick={() => commit(round2(value - 0.5))}
+          onClick={() => commit(round2(value - 1.0))}
           disabled={value <= 0}
-          aria-label={`− 0.5 ${t("common.meal")}`}
+          aria-label={`− 1.0 ${t("common.meal")}`}
           className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-surface-2 text-xl font-bold text-brand-600 ring-1 ring-line transition-colors hover:bg-surface-3 disabled:opacity-40 dark:text-brand-300"
         >
           −
@@ -327,8 +327,8 @@ function MealRow({
 
         <button
           type="button"
-          onClick={() => commit(round2(value + 0.5))}
-          aria-label={`+ 0.5 ${t("common.meal")}`}
+          onClick={() => commit(round2(value + 1.0))}
+          aria-label={`+ 1.0 ${t("common.meal")}`}
           className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-500 text-xl font-bold text-white shadow-sm transition-colors hover:bg-brand-600 active:bg-brand-700"
         >
           +
